@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HeaderCom/>
+    <router-view></router-view>
+    <FooterCom v-show='$route.meta.showFooter'></FooterCom>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HeaderCom from '@/components/Header'
+import FooterCom from '@/components/Footer'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+  HeaderCom,
+  FooterCom
+  },
+  mounted(){
+    //通知vuex发请求，获取数据，存储于仓库中
+    this.$store.dispatch('categoryList')
+    // // 
+    //  this.$store.dispatch('getUserInfo')
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#nprogress .bar {
+background: #e1251b !important;
+/* height: 5px !important; */
+
+}
+#nprogress .spinner .spinner-icon {
+border-top-color: #e1251b;
+border-left-color: #e1251b;
 }
 </style>
